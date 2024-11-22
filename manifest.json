@@ -3,7 +3,12 @@
   "name": "Copy JIRA to Clipboard",
   "version": "1.0",
   "description": "Copy the content of JIRA summary and link to the clipboard",
-  "permissions": ["activeTab", "storage", "clipboardWrite", "scripting"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "scripting"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

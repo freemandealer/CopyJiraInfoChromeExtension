@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Copy JIRA to Clipboard",
+  "name": "Copy JIRA Info to Clipboard",
   "version": "1.0",
   "description": "Copy the content of JIRA summary and link to the clipboard",
   "permissions": [

@@ -53,13 +53,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const commentPrompt = "对评论区内容做一个一句话摘要:";
                 const commentMessages = [{ "role": "user", "content": commentPrompt + commentText }];
 
-                const [descSummaryResult, commentSummaryResult] = await Promise.all([
-                    completion(accessToken, descMessages),
-                    completion(accessToken, commentMessages)
-                ]);
+                var descSummary = "无内容";
+                var commentSummary = "无内容";
 
-                descSummary = descSummaryResult.result;
-                commentSummary = commentSummaryResult.result;
+                if (commentText.trim().length != 0 && descText.trim().length != 0) {
+                    const [descSummaryResult, commentSummaryResult] = await Promise.all([
+                        completion(accessToken, descMessages),
+                        completion(accessToken, commentMessages)
+                    ]);
+                    descSummary = descSummaryResult.result;
+                    commentSummary = commentSummaryResult.result;
+                } else if (commentText.trim().length == 0 && descText.trim().length != 0) {
+                    const [descSummaryResult] = await Promise.all([
+                        completion(accessToken, descMessages)
+                    ]);
+                    console.log('descSummaryResult:', descSummaryResult);
+                    descSummary = descSummaryResult.result;
+                } else if (commentText.trim().length != 0 && descText.trim().length == 0) {
+                    const [commentSummaryResult] = await Promise.all([
+                        completion(accessToken, commentMessages)
+                    ]);
+                    commentSummary = commentSummaryResult.result;
+                } else {
+                    console.log('No content to summarize');
+                }
 
                 console.log('Description Completion Result:', descSummary);
                 console.log('Comment Completion Result:', commentSummary);
